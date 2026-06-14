@@ -18,7 +18,7 @@
 
 Mono is a small collection of distraction-free tools for video.
 
-**Mono for Desktop** helps you organise and watch videos stored on your own computer. Build a clean local library, add folders, tags, and descriptions, then search and resume playback - all without touching what's on disk.
+**Mono for Desktop** is a desktop app for watching the videos already on your computer. Point it at your folders and it gathers them into one library you can search, preview, and play. Nothing is moved or uploaded; everything stays on your machine.
 
 **Mono for YouTube** is a browser extension that removes recommendations, visual clutter, and attention traps from YouTube while keeping the parts you still need: the player, search, descriptions, comments, and account controls.
 
@@ -37,10 +37,10 @@ Mono is a small collection of distraction-free tools for video.
   <img src="art/images/splash1.png" alt="Mono for Desktop showing a local video library" width="760">
 </p>
 
-- Keep your video library on your own computer.
-- Organise videos with folders, tags, notes, and search.
-- Resume playback with watch history and saved progress.
-- Build a virtual library without rearranging files on disk.
+- Gathers the videos on your computer into one searchable library.
+- Plays almost any format and resumes where you left off.
+- Previews videos when you hover over them.
+- Keeps everything on your machine without moving your files.
 
 ## Mono for YouTube
 
