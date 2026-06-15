@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/svg+xml" href="art/icon.svg">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 
 <body>
@@ -26,18 +27,18 @@
 
   <main>
     <section id="desktop" class="product-section" aria-labelledby="desktop-title">
-      <div class="section-label">01 / Desktop App</div>
+      <div class="section-label reveal">01 / Desktop App</div>
       <div class="product-grid product-grid-visual-first">
-        <div class="product-copy">
+        <div class="product-copy reveal">
           <h2 id="desktop-title">Mono for Desktop</h2>
           <p class="eyebrow">A distraction-free video library</p>
           <p>
             A desktop app for watching the videos already on your computer. Point it at your folders and it gathers them into one library you can search, preview, and play. Nothing is moved or uploaded; everything stays on your machine.
           </p>
           <ul class="feature-list">
-            <li>Gathers the videos on your computer into one searchable library.</li>
-            <li>Plays almost any format and resumes where you left off.</li>
-            <li>Keeps everything on your machine without moving your files.</li>
+            <li>Gathers your videos into one searchable library.</li>
+            <li>Plays almost any format and picks up where you left off.</li>
+            <li>The files on your machine remain untouched.</li>
           </ul>
           <div class="store-links product-download" aria-label="Desktop download links">
             <a class="download-link" href="files/Mono Installer.msi">Direct Download</a>
@@ -47,16 +48,16 @@
             </a>
           </div>
         </div>
-        <figure class="product-visual">
+        <figure class="product-visual reveal">
           <img src="art/images/splash1.png" alt="Mono for Desktop showing a clean local video library" width="1600" height="1000" loading="lazy">
         </figure>
       </div>
     </section>
 
     <section id="youtube" class="product-section" aria-labelledby="youtube-title">
-      <div class="section-label">02 / Browser Extension</div>
+      <div class="section-label reveal">02 / Browser Extension</div>
       <div class="product-grid">
-        <div class="product-copy">
+        <div class="product-copy reveal">
           <h2 id="youtube-title">Mono for YouTube</h2>
           <p class="eyebrow">A distraction-free YouTube extension</p>
           <p>
@@ -64,17 +65,17 @@
           </p>
           <ul class="feature-list">
             <li>Removes recommendations and other attention traps.</li>
-            <li>Keeps the video player, search, description, and comments.</li>
-            <li>Runs quietly without tracking you or adding extra clutter.</li>
+            <li>Keeps the player, search, description, and comments.</li>
+            <li>Runs quietly without tracking you or adding clutter.</li>
           </ul>
           <div class="store-links product-download" aria-label="Browser install links">
             <a class="download-link" href="https://chromewebstore.google.com/detail/focus-for-youtube/nppiofogichmlkadpbpkpojpidedifeh" target="_blank" rel="noreferrer">
               <img class="download-link-icon" src="art/chrome.svg" alt="" aria-hidden="true" width="18" height="18">
-              <span>Chrome Web Store</span>
+              <span>Chrome</span>
             </a>
             <a class="download-link" href="https://addons.mozilla.org/en-US/firefox/addon/mono-extension/" target="_blank" rel="noreferrer">
               <img class="download-link-icon" src="art/firefox.svg" alt="" aria-hidden="true" width="18" height="18">
-              <span>Firefox Add-ons</span>
+              <span>Firefox</span>
             </a>
             <a class="download-link" href="https://github.com/Aadam-Gafar/Mono-for-YouTube" target="_blank" rel="noreferrer">
               <img class="download-link-icon" src="art/github.svg" alt="" aria-hidden="true" width="18" height="18">
@@ -82,7 +83,7 @@
             </a>
           </div>
         </div>
-        <figure class="product-visual">
+        <figure class="product-visual reveal">
           <img src="art/images/splash2.png" alt="Mono for YouTube extension preview with a simplified YouTube interface" width="1600" height="1000" loading="lazy">
         </figure>
       </div>
@@ -99,6 +100,118 @@
       <a href="mailto:contact@monoapp.uk">Contact</a>
     </nav>
   </footer>
+
+  <script>
+    (function () {
+      var mq = window.matchMedia;
+      if (mq && mq('(pointer: fine)').matches && !mq('(prefers-reduced-motion: reduce)').matches) {
+        dotField();
+      }
+
+      var reveals = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || !reveals.length) {
+        for (var i = 0; i < reveals.length; i++) reveals[i].classList.add('is-visible');
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+    })();
+
+    /*
+     * Interactive dot field. One fixed canvas; on each pointer frame the dots
+     * within a radius are displaced radially outward, so the grid appears to
+     * be pushed away from the cursor. Cheap: a single batched path is filled
+     * once per rAF, and frames are only scheduled while the pointer moves.
+     */
+    function dotField() {
+      var canvas = document.createElement('canvas');
+      canvas.className = 'dot-canvas';
+      canvas.setAttribute('aria-hidden', 'true');
+      var ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      document.body.appendChild(canvas);
+      document.documentElement.classList.add('dotfield');
+
+      var GAP = 24, HALF = 12, DOT = 1.1, RADIUS = 116, STRENGTH = 18, TAU = Math.PI * 2;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = 0, h = 0, cols = 0, rows = 0;
+      var mx = 0, my = 0, active = false, frame = 0;
+
+      function size() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.ceil(w / GAP);
+        rows = Math.ceil(h / GAP);
+        draw();
+      }
+
+      function draw() {
+        frame = 0;
+        ctx.clearRect(0, 0, w, h);
+        ctx.fillStyle = 'rgba(15, 15, 15, 0.12)';
+        ctx.beginPath();
+        for (var gx = 0; gx <= cols; gx++) {
+          for (var gy = 0; gy <= rows; gy++) {
+            var x = gx * GAP + HALF;
+            var y = gy * GAP + HALF;
+            if (active) {
+              var dx = x - mx, dy = y - my;
+              var d = Math.sqrt(dx * dx + dy * dy);
+              if (d < RADIUS && d > 0.001) {
+                var push = STRENGTH * (1 - d / RADIUS);
+                x += (dx / d) * push;
+                y += (dy / d) * push;
+              }
+            }
+            ctx.moveTo(x + DOT, y);
+            ctx.arc(x, y, DOT, 0, TAU);
+          }
+        }
+        ctx.fill();
+      }
+
+      function schedule() {
+        if (!frame) frame = requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('pointermove', function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+        active = true;
+        schedule();
+      }, { passive: true });
+
+      document.addEventListener('mouseleave', function () {
+        active = false;
+        schedule();
+      });
+
+      var resizeFrame = 0;
+      window.addEventListener('resize', function () {
+        if (!resizeFrame) {
+          resizeFrame = requestAnimationFrame(function () {
+            resizeFrame = 0;
+            size();
+          });
+        }
+      });
+
+      size();
+    }
+  </script>
 </body>
 
 </html>
