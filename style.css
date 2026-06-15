@@ -6,7 +6,6 @@
   --color-text: #0f0f0f;
   --color-muted: #5d5d5d;
   --color-line: #d8d8d8;
-  --color-bg: #ffffff;
   --color-bg-soft: #fbfaf7;
   --color-red: #cd2424;
   --max-width: 1180px;
@@ -82,8 +81,7 @@ a {
   text-decoration: none;
 }
 
-a:focus-visible,
-button:focus-visible {
+a:focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: 4px;
 }
@@ -108,20 +106,8 @@ button:focus-visible {
   height: auto;
 }
 
-.eyebrow,
-.section-label {
-  margin: 0 0 16px;
-  color: var(--color-red);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
 h1,
 h2,
-h3,
 p {
   margin-top: 0;
 }
@@ -141,12 +127,6 @@ h2 {
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0;
-}
-
-h3 {
-  margin-bottom: 10px;
-  font-size: 21px;
-  line-height: 1.2;
 }
 
 .product-copy p,
@@ -260,10 +240,6 @@ h3 {
 
 .policy-list strong {
   color: var(--color-text);
-}
-
-.policy-contact {
-  margin-top: 8px;
 }
 
 .product-grid {
