@@ -404,6 +404,11 @@ h2 {
   margin: 0;
 }
 
+.product-intro .hl {
+  color: var(--color-red);
+  font-weight: 600;
+}
+
 .product-download {
   justify-content: center;
   margin-top: clamp(40px, 6vw, 88px);
