@@ -87,13 +87,25 @@ a:focus-visible {
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  border-bottom: 1px solid var(--color-line);
+  background: rgba(251, 250, 247, 0.72);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  animation: enter-soft 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.navbar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 16px;
   width: min(100% - 32px, var(--max-width));
   margin: 0 auto;
-  padding: 16px 0;
-  animation: enter-soft 480ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  padding: 12px 0;
 }
 
 .brand {
@@ -102,8 +114,28 @@ a:focus-visible {
 }
 
 .brand img {
-  width: 124px;
+  display: block;
+  width: 104px;
   height: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3vw, 34px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.nav-links a:hover {
+  color: var(--color-red);
 }
 
 h1,
@@ -376,6 +408,7 @@ h2 {
   margin: 0 auto;
   border-top: 1px solid var(--color-line);
   padding: clamp(36px, 5vw, 60px) 0;
+  scroll-margin-top: 72px;
   text-align: center;
   animation: draw-divider 500ms ease both;
 }
@@ -498,7 +531,7 @@ h2 {
 }
 
 @media (max-width: 560px) {
-  .site-header,
+  .navbar,
   .site-footer,
   .product-section,
   .policy-page {
