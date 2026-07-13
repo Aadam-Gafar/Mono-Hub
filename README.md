@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://monoapp.uk">
-    <img src="art/logo_white_text.svg" alt="Mono" width="180">
+    <img src="art/logo_white_text.png" alt="Mono" width="180">
   </a>
 </p>
 
