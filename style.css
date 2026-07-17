@@ -557,6 +557,17 @@ h2 {
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .footer-links {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .footer-links span {
+    display: none;
   }
 
   .site-footer a,
